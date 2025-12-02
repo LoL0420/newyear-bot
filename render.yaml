@@ -1,0 +1,21 @@
+# 1. Создайте render.yaml
+cat > render.yaml << 'EOF'
+services:
+  - type: web
+    name: newyear-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+EOF
+
+# 2. Проверьте что requirements.txt есть
+cat requirements.txt
+# Должно быть: python-telegram-bot==20.7
+
+# 3. Проверьте bot.py
+head -20 bot.py
+# Убедитесь что в начале есть код с получением токена из os.environ
